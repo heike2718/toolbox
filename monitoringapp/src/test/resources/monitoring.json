@@ -1,0 +1,21 @@
+{
+  "env": "DEV",
+  "mailActivated": false,
+  "pathTruststoreFile": "/usr/lib/jvm/jdk-11.0.2/lib/security/cacerts",
+  "urls": [
+      "https://google.de",
+      "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"
+  ],
+  "emails": [
+      "info@egladil.de"
+  ],
+  "pollIntervallMinutes": 30,
+  "randomIntervallSeconds": 180,
+  "readTimeoutMilliSeconds": 5000,
+  "mailhost": "smtp.provider.com",
+  "mailport": 123,
+  "mailuser": "mail@provider.com",
+  "mailpwd": "g3he1m",
+  "telegramSecret": "g3he1m~woahahaha",
+  "telegramChatId": "11111"
+}
