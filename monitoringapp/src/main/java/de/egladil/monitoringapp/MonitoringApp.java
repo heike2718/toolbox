@@ -56,12 +56,10 @@ public class MonitoringApp {
 		} catch (ConfigurationException e) {
 
 			System.err.println(e.getMessage());
-			System.exit(2);
 		} catch (Exception e) {
 
 			e.printStackTrace();
 			System.err.println("Unerwartete Exception " + e.getClass().getName() + ": " + e.getMessage());
-			System.exit(3);
 		}
 	}
 
@@ -83,7 +81,6 @@ public class MonitoringApp {
 
 		System.err.println("Konnte Konfiguration nicht lesen: bitte System.property '-D" + MonitoringConfig.CONFIG_FILE
 			+ "' auf eine Json-Datei setzen, die zu MonitoringConfig deserialisiert werden kann.");
-		System.exit(1);
 	}
 
 	private static MonitoringConfig getAndCheckConfig() throws FileNotFoundException, IOException {
