@@ -7,7 +7,8 @@ package de.egladil.monitoringapp.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import de.egladil.monitoringapp.MessageDelegate;
 import de.egladil.monitoringapp.MonitoringConfig;
@@ -35,10 +36,10 @@ public class MailDelegate implements MessageDelegate {
 	@Override
 	public void sendMessage(final String messageBody, final MonitoringConfig config) {
 
-		final List<String> emails = config.getEmails();
+		String empfaenger = StringUtils.join(config.getEmails(), ",");
 
 		DefaultEmailDaten maildaten = new DefaultEmailDaten();
-		maildaten.setEmpfaenger(getEmpfaenger(emails));
+		maildaten.setEmpfaenger(empfaenger);
 		maildaten.setBetreff(getSubject(config, new Date()));
 		maildaten.setText(messageBody);
 
@@ -46,27 +47,6 @@ public class MailDelegate implements MessageDelegate {
 			config.getMailuser(), config.getMailpwd().toCharArray(), config.getMailuser());
 
 		this.commonMailService.sendMail(maildaten, credentials);
-	}
-
-	String getEmpfaenger(final List<String> emails) {
-
-		int max = emails.size();
-		int count = 0;
-
-		StringBuffer sb = new StringBuffer();
-
-		for (String email : emails) {
-
-			sb.append(email);
-
-			if (count <= max - 2) {
-
-				sb.append(",");
-			}
-			count++;
-		}
-
-		return sb.toString();
 	}
 
 	String getSubject(final MonitoringConfig config, final Date jetzt) {

@@ -1,4 +1,4 @@
-# checklistenserver Release Notes
+# monitoringapp Release Notes
 
 __Release 2.1.2__
 
