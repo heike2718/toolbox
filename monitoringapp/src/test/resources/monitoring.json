@@ -1,21 +1,26 @@
 {
   "env": "DEV",
-  "mailActivated": false,
-  "pathTruststoreFile": "/usr/lib/jvm/jdk-11.0.2/lib/security/cacerts",
+  "pathTruststoreFile": "/usr/lib/jvm/jdk-11/lib/security",
   "urls": [
-      "https://google.de",
-      "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"
+    "https://google.de",
+    "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"
   ],
   "emails": [
-      "info@egladil.de"
+    "heikewinkelvoss@web.de",
+    "info@egladil.de"
   ],
   "pollIntervallMinutes": 30,
   "randomIntervallSeconds": 180,
   "readTimeoutMilliSeconds": 5000,
-  "mailhost": "smtp.provider.com",
-  "mailport": 123,
-  "mailuser": "mail@provider.com",
-  "mailpwd": "g3he1m",
-  "telegramSecret": "g3he1m~woahahaha",
-  "telegramChatId": "11111"
+  "mailConfig": {
+    "activated": true,
+    "host": "smtp.provider.com",
+    "port": 123,
+    "user": "mail@provider.com",
+    "pwd": "g3he1m!"
+  },
+  "telegramConfig": {
+    "secret": "g3he1m~woahahaha",
+    "chatId": "11111"
+  }
 }

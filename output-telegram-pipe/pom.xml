@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.egladil</groupId>
-	<artifactId>monitoringapp</artifactId>
-	<version>3.0.0</version>
+	<artifactId>output-telegram-pipe</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>monitoringapp</name>
-	<url>https://gitlab.com/heik2718/monitoringapp</url>
-	<description>Anwendung zum Monitoren unserer Server</description>
+	<name>output-telegram-pipe</name>
+	<url>https://github.com/heike2718/toolbox</url>
+	<description>Verwendet output auf stdout als input für eine Telegram-Message.</description>
 
 	<properties>
 		<commons.version>1.5.1</commons.version>
@@ -35,17 +35,12 @@
 
 		<dependency>
 			<groupId>de.egladil.web</groupId>
-			<artifactId>commons-mailer</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.egladil.web</groupId>
 			<artifactId>commons-messager</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.egladil.web</groupId>
-			<artifactId>commons-net</artifactId>
+			<artifactId>commons-mailer</artifactId>
 		</dependency>
 
 		<dependency>
@@ -54,20 +49,27 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.egladil.web</groupId>
-			<artifactId>commons-testsupport</artifactId>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>1.81</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.8.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.12.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-client</artifactId>
-			<version>4.6.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -184,7 +186,7 @@
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>de.egladil.monitoringapp.MonitoringApp</mainClass>
+									<mainClass>de.egladil.output_telegram_pipe.PipeApp</mainClass>
 									<!-- Log4j includes custom classes for Java 9+ (#293) -->
 									<manifestEntries>
 										<Multi-Release>true</Multi-Release>
