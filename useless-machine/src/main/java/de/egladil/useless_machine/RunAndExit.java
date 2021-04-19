@@ -15,7 +15,7 @@ public class RunAndExit {
 	public static void main(final String[] args) {
 
 		System.out.println("Hallöchen");
-		System.exit(0);
+		System.exit(1);
 
 	}
 
