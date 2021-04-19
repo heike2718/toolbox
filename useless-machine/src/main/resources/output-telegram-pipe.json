@@ -1,0 +1,23 @@
+{
+  "env": "DEV",
+  "allowedUsersConfig": {
+    "ansibleUser": "ansible-user",
+    "root": "the-root",
+    "sshUser": "unpriveleged-ssh-user",
+    "sudoUser": "sudo-user"
+  },
+  "emails": [
+    "webmaster@egladil.de"
+  ],
+  "mailConfig": {
+    "activated": false,
+    "host": "smtp@provider.com",
+    "port": 234,
+    "user": "norbert@provider.com",
+    "pwd": "g3he!M~"
+  },
+  "telegramConfig": {
+    "secret": "woahahahaha",
+    "chatId": "1111111"
+  }
+}
