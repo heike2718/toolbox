@@ -51,14 +51,12 @@ public class PropagateSSHLoginCommand implements PipeCommand {
 			appConfig = new PipeAppConfigReader().readConfigurationFromFileSystem(pathConfigDir);
 		}
 
-		List<String> commands = new ArrayList<String>();
-		commands.add("bash");
-		commands.add("-c");
-		commands.add("pinky -wf");
+		String pinkyOutcome = executePinkyCommand();
+		String currentUserOutcome = executeWhoamiCommand();
+		String currentUser = new WhoamiOutputUserAliasMapper(appConfig).apply(currentUserOutcome);
 
-		String outcome = commandExecutor.executeCommand(commands);
-
-		SSHLoginInfo loginInfo = new ShortPinkyOutputSSHLoginInfoMapper(appConfig).apply(outcome);
+		SSHLoginInfo loginInfo = new ShortPinkyOutputSSHLoginInfoMapper(appConfig).apply(pinkyOutcome);
+		loginInfo.withCurrentUser(currentUser).withCurrentTime(this.executeDateCommand());
 		MessagePayload messagePayload = loginInfo.getMessagePayload();
 
 		if (loginInfo.isError()) {
@@ -72,9 +70,45 @@ public class PropagateSSHLoginCommand implements PipeCommand {
 
 			new TelegramPublisher().publishMessage(subject, appConfig.getEnv() + ": " + messageBody, appConfig);
 			new MailPublisher().publishMessage(subject, messageBody, appConfig);
-
 		}
 
+	}
+
+	/**
+	 * @return
+	 */
+	private String executePinkyCommand() {
+
+		List<String> commands = new ArrayList<String>();
+		commands.add("bash");
+		commands.add("-c");
+		commands.add("pinky -wf");
+
+		String outcome = commandExecutor.executeCommand(commands);
+		return outcome;
+	}
+
+	private String executeWhoamiCommand() {
+
+		List<String> commands = new ArrayList<String>();
+		commands.add("bash");
+		commands.add("-c");
+		commands.add("whoami");
+
+		String outcome = commandExecutor.executeCommand(commands);
+		return outcome;
+	}
+
+	private String executeDateCommand() {
+
+		List<String> commands = new ArrayList<String>();
+		commands.add("bash");
+		commands.add("-c");
+		commands.add("date");
+
+		String outcome = commandExecutor.executeCommand(commands);
+		outcome = outcome.replace("\n", "");
+		return outcome;
 	}
 
 	@Override

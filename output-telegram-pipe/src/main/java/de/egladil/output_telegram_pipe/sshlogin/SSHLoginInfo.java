@@ -13,96 +13,70 @@ public class SSHLoginInfo {
 
 	private MessagePayload messagePayload = MessagePayload.ok();
 
-	private String user;
+	private String sshUser;
 
-	private String datum;
-
-	private String uhrzeit;
+	private String currentTime;
 
 	private String ipAddress;
+
+	private String currentUser;
 
 	@Override
 	public String toString() {
 
-		return "SSHLoginInfo [user=" + user + ", datum=" + datum + ", uhrzeit=" + uhrzeit + ", ipAddress=" + ipAddress + "]";
+		return "SSHLoginInfo [sshUser=" + sshUser + ", datumUndUhrzeit=" + currentTime + ", ipAddress=" + ipAddress
+			+ ", currentUser=" + currentUser + "]";
 	}
 
-	/**
-	 * @return the user
-	 */
 	public String wer() {
 
-		return user;
+		return sshUser;
 	}
 
-	/**
-	 * @param user
-	 *             the user to set
-	 */
-	public SSHLoginInfo withUser(final String user) {
+	public SSHLoginInfo withSshUser(final String user) {
 
-		this.user = user;
+		this.sshUser = user;
 		return this;
 	}
 
-	/**
-	 * @return the datum
-	 */
 	public String wann() {
 
-		return datum == null ? null : datum + " " + this.uhrzeit;
+		return currentTime;
 	}
 
-	/**
-	 * @param datum
-	 *              the datum to set
-	 */
-	public SSHLoginInfo withDatum(final String datum) {
+	public SSHLoginInfo withCurrentTime(final String currentTime) {
 
-		this.datum = datum;
+		this.currentTime = currentTime;
 		return this;
 	}
 
-	/**
-	 * @param uhrzeit
-	 *                the uhrzeit to set
-	 */
-	public SSHLoginInfo withUhrzeit(final String uhrzeit) {
-
-		this.uhrzeit = uhrzeit;
-		return this;
-	}
-
-	/**
-	 * @return the ipAddress
-	 */
 	public String vonWo() {
 
 		return ipAddress;
 	}
 
-	/**
-	 * @param ipAddress
-	 *                  the ipAddress to set
-	 */
 	public SSHLoginInfo withIpAddress(final String ipAddress) {
 
 		this.ipAddress = ipAddress;
 		return this;
 	}
 
-	/**
-	 * @return the messagePayload
-	 */
+	public String currentUser() {
+
+		return currentUser;
+	}
+
+	public SSHLoginInfo withCurrentUser(final String currentUser) {
+
+		this.currentUser = currentUser;
+		return this;
+	}
+
 	public MessagePayload getMessagePayload() {
 
 		return messagePayload;
 	}
 
-	/**
-	 * @param messagePayload
-	 *                       the messagePayload to set
-	 */
 	public SSHLoginInfo withMessagePayload(final MessagePayload messagePayload) {
 
 		this.messagePayload = messagePayload;
@@ -113,4 +87,5 @@ public class SSHLoginInfo {
 
 		return "ERROR".equalsIgnoreCase(messagePayload.getLevel());
 	}
+
 }
