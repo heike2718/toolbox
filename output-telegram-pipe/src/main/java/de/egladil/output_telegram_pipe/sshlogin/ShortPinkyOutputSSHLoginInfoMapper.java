@@ -54,17 +54,15 @@ public class ShortPinkyOutputSSHLoginInfoMapper implements Function<String, SSHL
 			String message = "!!!!  erfolgreiches Login eines unbekannten users  !!!";
 			LOGGER.warn(message + " username=" + user);
 
-			return new SSHLoginInfo().withMessagePayload(MessagePayload.warn(message)).withUser(user)
-				.withDatum(tokens[tokens.length - 3])
-				.withUhrzeit(tokens[tokens.length - 2]).withIpAddress(tokens[tokens.length - 1]);
+			return new SSHLoginInfo().withMessagePayload(MessagePayload.warn(message)).withSshUser(user)
+				.withIpAddress(tokens[tokens.length - 1]);
 		}
 
 		String message = "===  erfolgreiches Login eines erlaubten users  ===";
 		LOGGER.info(message + " username=" + user);
 
-		return new SSHLoginInfo().withMessagePayload(MessagePayload.warn(message)).withUser(optMappedUserType.get().name())
-			.withDatum(tokens[tokens.length - 3])
-			.withUhrzeit(tokens[tokens.length - 2]).withIpAddress(tokens[tokens.length - 1]);
+		return new SSHLoginInfo().withMessagePayload(MessagePayload.warn(message)).withSshUser(optMappedUserType.get().name())
+			.withIpAddress(tokens[tokens.length - 1]);
 	}
 
 }

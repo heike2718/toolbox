@@ -6,6 +6,7 @@ package de.egladil.output_telegram_pipe.sshlogin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -63,7 +64,7 @@ public class ShortPinkyOutputSSHLoginInfoMapperTest {
 		// Assert
 		assertFalse(loginInfo.isError());
 		assertEquals("SUDO_USER", loginInfo.wer());
-		assertEquals("2021-04-18 08:22", loginInfo.wann());
+		assertNull(loginInfo.wann());
 		assertEquals("192.168.10.176", loginInfo.vonWo());
 
 		MessagePayload mp = loginInfo.getMessagePayload();
@@ -84,7 +85,7 @@ public class ShortPinkyOutputSSHLoginInfoMapperTest {
 		// Assert
 		assertFalse(loginInfo.isError());
 		assertEquals("ANSIBLE_USER", loginInfo.wer());
-		assertEquals("2021-04-18 08:24", loginInfo.wann());
+		assertNull(loginInfo.wann());
 		assertEquals("192.168.10.176", loginInfo.vonWo());
 
 		MessagePayload mp = loginInfo.getMessagePayload();
@@ -105,7 +106,7 @@ public class ShortPinkyOutputSSHLoginInfoMapperTest {
 		// Assert
 		assertFalse(loginInfo.isError());
 		assertEquals("boesewicht", loginInfo.wer());
-		assertEquals("2021-04-18 08:22", loginInfo.wann());
+		assertNull(loginInfo.wann());
 		assertEquals("192.168.10.176", loginInfo.vonWo());
 
 		MessagePayload mp = loginInfo.getMessagePayload();
@@ -126,7 +127,7 @@ public class ShortPinkyOutputSSHLoginInfoMapperTest {
 		// Assert
 		assertFalse(loginInfo.isError());
 		assertEquals("boesewicht", loginInfo.wer());
-		assertEquals("2021-04-18 08:24", loginInfo.wann());
+		assertNull(loginInfo.wann());
 		assertEquals("192.168.10.176", loginInfo.vonWo());
 
 		MessagePayload mp = loginInfo.getMessagePayload();
