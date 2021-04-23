@@ -4,7 +4,8 @@
     "ansibleUser": "ansible-user",
     "root": "the-root",
     "sshUser": "unpriveleged-ssh-user",
-    "sudoUser": "sudo-user"
+    "sudoUser": "sudo-user",
+    "sudoUser2": "sudo-user2"
   },
   "emails": [
     "webmaster@egladil.de"

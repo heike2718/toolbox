@@ -85,6 +85,20 @@ public class PinkyUserOutputUserInfoMapperTest {
 	}
 
 	@Test
+	void should_returnSudoOptional_when_mapsToSudoUser2() {
+
+		// Arrange
+		String usrname = "sudo-user2";
+
+		// Act
+		Optional<UserType> result = mapper.apply(usrname);
+
+		// Assert
+		assertTrue(result.isPresent());
+		assertEquals(UserType.SUDO_USER2, result.get());
+	}
+
+	@Test
 	void should_returnSSHOptional_when_mapsToSSHUser() {
 
 		// Arrange

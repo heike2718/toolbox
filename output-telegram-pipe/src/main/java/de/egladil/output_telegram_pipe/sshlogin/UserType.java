@@ -12,5 +12,6 @@ public enum UserType {
 	ANSIBLE_USER,
 	ROOT,
 	SSH_USER,
-	SUDO_USER;
+	SUDO_USER,
+	SUDO_USER2;
 }

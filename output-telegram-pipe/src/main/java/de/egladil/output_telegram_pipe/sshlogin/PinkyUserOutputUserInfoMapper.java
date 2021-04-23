@@ -33,6 +33,8 @@ public class PinkyUserOutputUserInfoMapper implements Function<String, Optional<
 			UserType.SSH_USER);
 		userNameMap.put(allowedUsersConfig.sudoUser().toLowerCase(),
 			UserType.SUDO_USER);
+		userNameMap.put(allowedUsersConfig.sudoUser2().toLowerCase(),
+			UserType.SUDO_USER2);
 	}
 
 	@Override
