@@ -23,6 +23,9 @@ public class AllowedUsersConfig {
 	@JsonProperty
 	private String sudoUser;
 
+	@JsonProperty
+	private String sudoUser2;
+
 	/**
 	 * @return the ansibleUser
 	 */
@@ -92,6 +95,24 @@ public class AllowedUsersConfig {
 	public AllowedUsersConfig withSudoUser(final String sudoUser) {
 
 		this.sudoUser = sudoUser;
+		return this;
+	}
+
+	/**
+	 * @return the sudoUser
+	 */
+	public String sudoUser2() {
+
+		return sudoUser2;
+	}
+
+	/**
+	 * @param sudoUser
+	 *                 the sudoUser to set
+	 */
+	public AllowedUsersConfig withSudoUser2(final String sudoUser2) {
+
+		this.sudoUser2 = sudoUser2;
 		return this;
 	}
 

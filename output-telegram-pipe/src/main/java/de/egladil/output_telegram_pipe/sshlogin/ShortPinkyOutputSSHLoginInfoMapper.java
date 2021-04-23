@@ -60,7 +60,7 @@ public class ShortPinkyOutputSSHLoginInfoMapper implements Function<String, SSHL
 		}
 
 		String message = "===  erfolgreiches Login eines erlaubten users  ===";
-		LOGGER.warn(message + " username=" + user);
+		LOGGER.info(message + " username=" + user);
 
 		return new SSHLoginInfo().withMessagePayload(MessagePayload.warn(message)).withUser(optMappedUserType.get().name())
 			.withDatum(tokens[tokens.length - 3])
