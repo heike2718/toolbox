@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +49,9 @@ public class MonitoringTask implements Callable<ResponsePayload> {
 	@Override
 	public ResponsePayload call() throws Exception {
 
-		LOG.debug("call {}", requestUrl);
+		String requestUrlAbbr = StringUtils.abbreviate(requestUrl, 42);
+
+		LOG.debug("call {}", requestUrlAbbr);
 
 		try {
 
@@ -62,26 +65,26 @@ public class MonitoringTask implements Callable<ResponsePayload> {
 			byte[] bytes = this.contentReader.getBytes(conn);
 			LOG.debug("Anzahl bytes: {}", bytes.length);
 
-			return ResponsePayload.messageOnly(MessagePayload.info("OK: " + requestUrl));
+			return ResponsePayload.messageOnly(MessagePayload.info("OK: " + requestUrlAbbr));
 		} catch (MalformedURLException e) {
 
 			String pathConfig = System.getProperty(MonitoringConfig.CONFIG_FILE);
 			LOG.error("Konfigurationsfehler in {}: {}", pathConfig, e.getMessage());
 			return ResponsePayload
-				.messageOnly(MessagePayload.error("ERROR: " + requestUrl + " - Konfigurationsfehler: " + e.getMessage()));
+				.messageOnly(MessagePayload.error("ERROR: " + requestUrlAbbr + " - Konfigurationsfehler: " + e.getMessage()));
 		} catch (SSLHandshakeException e) {
 
 			LOG.info(
 				"SSLHandshakeException: please import missing root-certificate calling 'keytool -import -alias letsencrypt -keystore  $JAVA_HOME/jre/lib/security/cacerts -file /usr/local/share/ca-certificates/letsencrypt.crt'");
-			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrl + " - " + e.getMessage()));
+			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrlAbbr + " - " + e.getMessage()));
 		} catch (IOException e) {
 
-			LOG.error("IOException bei {}: {}", requestUrl, e.getMessage());
-			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrl + " - " + e.getMessage()));
+			LOG.error("IOException bei {}: {}", requestUrlAbbr, e.getMessage());
+			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrlAbbr + " - " + e.getMessage()));
 		} catch (Exception e) {
 
-			LOG.error("Unerwartete Exception bei {}: {}", requestUrl, e.getMessage(), e);
-			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrl + " - " + e.getMessage()));
+			LOG.error("Unerwartete Exception bei {}: {}", requestUrlAbbr, e.getMessage(), e);
+			return ResponsePayload.messageOnly(MessagePayload.error("ERROR: " + requestUrlAbbr + " - " + e.getMessage()));
 		}
 	}
 }

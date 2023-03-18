@@ -5,7 +5,7 @@
 
 	<groupId>de.egladil</groupId>
 	<artifactId>monitoringapp</artifactId>
-	<version>3.0.0</version>
+	<version>4.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>monitoringapp</name>
@@ -13,10 +13,10 @@
 	<description>Anwendung zum Monitoren unserer Server</description>
 
 	<properties>
-		<commons.version>1.5.1</commons.version>
-		<dependency-check.version>6.1.3</dependency-check.version>
+		<commons.version>1.8.0</commons.version>
+		<dependency-check.version>8.1.2</dependency-check.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.java>1.11</version.java>
+		<version.java>17</version.java>
 	</properties>
 
 	<dependencyManagement>
@@ -61,29 +61,29 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.12.1</version>
+			<version>2.14.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
-			<version>4.6.0.Final</version>
+			<version>6.2.3.Final</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
+			<version>2.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.14.1</version>
+			<version>2.20.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.14.1</version>
+			<version>2.20.0</version>
 		</dependency>
 
 		<!-- Test -->
@@ -91,28 +91,28 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.7.1</version>
+			<version>5.9.2</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.7.1</version>
+			<version>5.9.2</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-runner</artifactId>
-			<version>1.7.1</version>
+			<version>1.9.2</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>3.9.0</version>
+			<version>5.2.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

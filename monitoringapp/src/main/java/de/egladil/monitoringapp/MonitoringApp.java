@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.egladil.monitoringapp.exceptions.ConfigurationException;
+import de.egladil.monitoringapp.impl.OneTimeMonitoringRunner;
 import de.egladil.monitoringapp.impl.SystemPropertyUtils;
 
 /**
@@ -36,17 +37,20 @@ public class MonitoringApp {
 
 				printUsageAndExit();
 			}
-			final MonitoringRunner runner = MonitoringRunner.create(config);
+			// final MonitoringRunner runner = MonitoringRunner.create(config);
 
-			Runtime.getRuntime().addShutdownHook(new Thread() {
-				@Override
-				public void run() {
+			System.out.println("Starting OneTimeMonitoringRunner");
+			new OneTimeMonitoringRunner(config).execute();
 
-					runner.stop();
-				}
-			});
-
-			runner.execute();
+			// Runtime.getRuntime().addShutdownHook(new Thread() {
+			// @Override
+			// public void run() {
+			//
+			// runner.stop();
+			// }
+			// });
+			//
+			// runner.execute();
 
 			System.out.println("Fertig");
 		} catch (IOException e) {
@@ -56,10 +60,12 @@ public class MonitoringApp {
 		} catch (ConfigurationException e) {
 
 			System.err.println(e.getMessage());
+			System.exit(2);
 		} catch (Exception e) {
 
 			e.printStackTrace();
 			System.err.println("Unerwartete Exception " + e.getClass().getName() + ": " + e.getMessage());
+			System.exit(3);
 		}
 	}
 
@@ -81,6 +87,7 @@ public class MonitoringApp {
 
 		System.err.println("Konnte Konfiguration nicht lesen: bitte System.property '-D" + MonitoringConfig.CONFIG_FILE
 			+ "' auf eine Json-Datei setzen, die zu MonitoringConfig deserialisiert werden kann.");
+		System.exit(1);
 	}
 
 	private static MonitoringConfig getAndCheckConfig() throws FileNotFoundException, IOException {

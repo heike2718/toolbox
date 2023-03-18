@@ -1,23 +1,21 @@
 {
   "env": "DEV",
-  "pathTruststoreFile": "/usr/lib/jvm/jdk-11/lib/security",
   "urls": [
-    "https://google.de",
-    "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"
+      "https://google.de",
+      "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"
   ],
   "emails": [
-    "heikewinkelvoss@web.de",
-    "info@egladil.de"
+      "info@egladil.de"
   ],
   "pollIntervallMinutes": 30,
-  "randomIntervallSeconds": 180,
+  "randomIntervallSeconds": 2,
   "readTimeoutMilliSeconds": 5000,
   "mailConfig": {
-    "activated": true,
+    "activated": false,
     "host": "smtp.provider.com",
     "port": 123,
     "user": "mail@provider.com",
-    "pwd": "g3he1m!"
+    "pwd": "g3he1m"
   },
   "telegramConfig": {
     "secret": "g3he1m~woahahaha",

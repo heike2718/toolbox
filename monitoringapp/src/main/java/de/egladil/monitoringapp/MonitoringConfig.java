@@ -7,11 +7,7 @@ package de.egladil.monitoringapp;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import de.egladil.web.commons_mailer.MailConfig;
-import de.egladil.web.commons_messager.telegram.TelegramConfig;
 
 /**
  * MonitoringConfig hat folgende Parameter:
@@ -30,9 +26,6 @@ public class MonitoringConfig {
 
 	@JsonProperty
 	private String env;
-
-	@JsonProperty
-	private String pathTruststoreFile;
 
 	@JsonProperty
 	private List<String> urls;
@@ -55,7 +48,6 @@ public class MonitoringConfig {
 	@JsonProperty
 	private TelegramConfig telegramConfig;
 
-	@JsonIgnore
 	public List<String> getUrls() {
 
 		return urls;
@@ -66,7 +58,6 @@ public class MonitoringConfig {
 		this.urls = urls;
 	}
 
-	@JsonIgnore
 	public List<String> getEmails() {
 
 		return emails;
@@ -77,7 +68,6 @@ public class MonitoringConfig {
 		this.emails = emails;
 	}
 
-	@JsonIgnore
 	public int getPollIntervallMinutes() {
 
 		return pollIntervallMinutes;
@@ -88,43 +78,26 @@ public class MonitoringConfig {
 		this.pollIntervallMinutes = pollIntervallSeconds;
 	}
 
-	@JsonIgnore
 	public String getMailhost() {
 
-		return this.mailConfig.host();
+		return mailConfig.getMailhost();
 	}
 
-	@JsonIgnore
 	public int getMailport() {
 
-		return this.mailConfig.port();
+		return mailConfig.getMailport();
 	}
 
-	@JsonIgnore
 	public String getMailuser() {
 
-		return this.mailConfig.user();
+		return mailConfig.getMailuser();
 	}
 
-	@JsonIgnore
 	public String getMailpwd() {
 
-		return this.mailConfig.pwd();
+		return mailConfig.getMailpwd();
 	}
 
-	@JsonIgnore
-	public String getTelegramSecret() {
-
-		return this.telegramConfig.secret();
-	}
-
-	@JsonIgnore
-	public String getTelegramChatId() {
-
-		return this.telegramConfig.chatId();
-	}
-
-	@JsonIgnore
 	public String getEnv() {
 
 		return env;
@@ -135,7 +108,6 @@ public class MonitoringConfig {
 		this.env = env;
 	}
 
-	@JsonIgnore
 	public int getRandomIntervallSeconds() {
 
 		return randomIntervallSeconds;
@@ -146,7 +118,6 @@ public class MonitoringConfig {
 		this.randomIntervallSeconds = randomIntervallSeconds;
 	}
 
-	@JsonIgnore
 	public int getReadTimeoutMilliSeconds() {
 
 		return readTimeoutMilliSeconds;
@@ -157,34 +128,38 @@ public class MonitoringConfig {
 		this.readTimeoutMilliSeconds = readTimeoutMilliSeconds;
 	}
 
-	@JsonIgnore
-	public String getPathTruststoreFile() {
+	public String getTelegramSecret() {
 
-		return pathTruststoreFile;
+		return telegramConfig.getSecret();
 	}
 
-	public void setPathTruststoreFile(final String pathTruststoreFile) {
+	public String getTelegramChatId() {
 
-		this.pathTruststoreFile = pathTruststoreFile;
+		return telegramConfig.getChatId();
 	}
 
-	@JsonIgnore
 	public boolean isMailActivated() {
 
-		return this.mailConfig.isMailActivated();
+		return mailConfig.isMailActivated();
+	}
+
+	public MailConfig getMailConfig() {
+
+		return mailConfig;
+	}
+
+	public void setMailConfig(final MailConfig mailConfig) {
+
+		this.mailConfig = mailConfig;
+	}
+
+	public TelegramConfig getTelegramConfig() {
+
+		return telegramConfig;
 	}
 
 	public void setTelegramConfig(final TelegramConfig telegramConfig) {
 
 		this.telegramConfig = telegramConfig;
-	}
-
-	/**
-	 * @param mailConfig
-	 *                   the mailConfig to set
-	 */
-	public void setMailConfig(final MailConfig mailConfig) {
-
-		this.mailConfig = mailConfig;
 	}
 }

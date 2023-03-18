@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,13 +52,19 @@ public class OneTimeMonitoringRunner implements MonitoringRunner {
 
 		for (String requestUrl : config.getUrls()) {
 
+			System.out.println("check " + StringUtils.abbreviate(requestUrl, 42));
+
 			try {
 
 				ResponsePayload result = new MonitoringTask(requestUrl, config.getReadTimeoutMilliSeconds()).call();
+				System.out.println(result.getMessage());
 				payloads.add(result);
 			} catch (Exception e) {
 
-				LOG.error("{} bei request {}: {}", e.getClass().getName(), requestUrl, e.getMessage(), e);
+				System.err
+					.println(e.getClass().getName() + " bei " + StringUtils.abbreviate(requestUrl, 42) + "-" + e.getMessage());
+				LOG.error("{} bei request {}: {}", e.getClass().getName(), StringUtils.abbreviate(requestUrl, 42), e.getMessage(),
+					e);
 				payloads.add(ResponsePayload.messageOnly(MessagePayload.error("Unerwartete Exception: " + e.getMessage())));
 			}
 		}
@@ -71,6 +78,7 @@ public class OneTimeMonitoringRunner implements MonitoringRunner {
 		sb.append(lineSeperator);
 		sb.append("=== Ergebnis Ende ===");
 
+		System.out.println(sb.toString());
 		LOG.info("{}", sb.toString());
 
 		List<ResponsePayload> errorPayloads = payloads.stream().filter(p -> "ERROR".equals(p.getMessage().getLevel()))
