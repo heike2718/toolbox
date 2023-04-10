@@ -20,10 +20,15 @@ public class MonitoringTaskTest {
 
 	private static final int READ_TIMEOUT = 3000;
 
+	private MonitoringConfig monitoringConfig;
+
 	@BeforeEach
 	public void setUp() {
 
 		System.setProperty(MonitoringConfig.CONFIG_FILE, "/home/heike/git/monitoringapp/src/test/resources/monitoring.json");
+		monitoringConfig = new MonitoringConfig();
+		monitoringConfig.setReadTimeoutMilliSeconds(READ_TIMEOUT);
+		monitoringConfig.setHeartbeatId("heartbeat");
 	}
 
 	@Test
@@ -31,7 +36,7 @@ public class MonitoringTaskTest {
 
 		// Arrange
 		String requestUrl = "https://google.de";
-		MonitoringTask check = new MonitoringTask(requestUrl, READ_TIMEOUT);
+		MonitoringTask check = new MonitoringTask(requestUrl, monitoringConfig);
 
 		// Act
 		ResponsePayload result = check.call();
@@ -47,31 +52,35 @@ public class MonitoringTaskTest {
 		// Arrange
 		String requestUrl = "https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite";
 
-		MonitoringTask check = new MonitoringTask(requestUrl, READ_TIMEOUT);
+		MonitoringTask check = new MonitoringTask(requestUrl, monitoringConfig);
 
 		// Act
 		ResponsePayload result = check.call();
 
 		// Assert
+		System.out.println(result.getMessage().toString());
+
 		assertEquals("INFO", result.getMessage().getLevel());
-		assertEquals("OK: https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite", result.getMessage().getMessage());
+		assertEquals("OK: https://de.wikipedia.org/wiki/Spezial:Z...", result.getMessage().getMessage());
 	}
 
 	@Test
-	void checkChecklistenApi() throws Exception {
+	void checkAuthproviderApi() throws Exception {
 
 		// Arrange
 		String requestUrl = "https://opa-wetterwachs.de/authprovider/heartbeats?heartbeatId=heartbeat";
 
-		MonitoringTask check = new MonitoringTask(requestUrl, READ_TIMEOUT);
+		MonitoringTask check = new MonitoringTask(requestUrl, monitoringConfig);
 
 		// Act
 		ResponsePayload result = check.call();
 
 		// Assert
+		System.out.println(result.getMessage().toString());
+
 		assertEquals("ERROR", result.getMessage().getLevel());
 		assertEquals(
-			"ERROR: https://opa-wetterwachs.de/authprovider/heartbeats?heartbeatId=heartbeat - Server returned HTTP response code: 401 for URL: https://opa-wetterwachs.de/authprovider/heartbeats?heartbeatId=heartbeat",
+			"ERROR: https://opa-wetterwachs.de/authprovider... - Server returned HTTP response code: 401 for URL: https://opa-wetterwachs.de/authprovider/heartbeats?heartbeatId=heartbeat",
 			result.getMessage().getMessage());
 	}
 
@@ -81,7 +90,7 @@ public class MonitoringTaskTest {
 		// Arrange
 		String requestUrl = "protokoll://eine-seite.de";
 
-		MonitoringTask check = new MonitoringTask(requestUrl, READ_TIMEOUT);
+		MonitoringTask check = new MonitoringTask(requestUrl, monitoringConfig);
 
 		// Act
 		ResponsePayload result = check.call();

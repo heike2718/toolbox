@@ -46,6 +46,9 @@ public class MonitoringConfig {
 	private MailConfig mailConfig;
 
 	@JsonProperty
+	private String heartbeatId;
+
+	@JsonProperty
 	private TelegramConfig telegramConfig;
 
 	public List<String> getUrls() {
@@ -161,5 +164,15 @@ public class MonitoringConfig {
 	public void setTelegramConfig(final TelegramConfig telegramConfig) {
 
 		this.telegramConfig = telegramConfig;
+	}
+
+	public String getHeartbeatId() {
+
+		return heartbeatId;
+	}
+
+	public void setHeartbeatId(final String heartbeatId) {
+
+		this.heartbeatId = heartbeatId;
 	}
 }

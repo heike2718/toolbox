@@ -56,7 +56,7 @@ public class OneTimeMonitoringRunner implements MonitoringRunner {
 
 			try {
 
-				ResponsePayload result = new MonitoringTask(requestUrl, config.getReadTimeoutMilliSeconds()).call();
+				ResponsePayload result = new MonitoringTask(requestUrl, config).call();
 				System.out.println(result.getMessage());
 				payloads.add(result);
 			} catch (Exception e) {

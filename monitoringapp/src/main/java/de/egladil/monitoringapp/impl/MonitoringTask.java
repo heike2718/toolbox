@@ -6,9 +6,9 @@
 package de.egladil.monitoringapp.impl;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.concurrent.Callable;
 
 import javax.net.ssl.SSLHandshakeException;
@@ -36,14 +36,17 @@ public class MonitoringTask implements Callable<ResponsePayload> {
 
 	private final Integer readTimeoutMilliSeconds;
 
+	private final String heartbeatId;
+
 	/**
 	 * Erzeugt eine Instanz von MonitoringTask
 	 */
-	public MonitoringTask(final String requestUrl, final Integer readTimeoutMilliSeconds) {
+	public MonitoringTask(final String requestUrl, final MonitoringConfig config) {
 
 		this.requestUrl = requestUrl;
 		this.contentReader = new SimpleContentReader();
-		this.readTimeoutMilliSeconds = readTimeoutMilliSeconds;
+		this.readTimeoutMilliSeconds = config.getReadTimeoutMilliSeconds();
+		this.heartbeatId = config.getHeartbeatId();
 	}
 
 	@Override
@@ -56,9 +59,12 @@ public class MonitoringTask implements Callable<ResponsePayload> {
 		try {
 
 			URL url = new URL(requestUrl);
-			URLConnection conn = url.openConnection();
+
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Content-type", "application/json");
 			conn.setRequestProperty("Accept", "*/*");
+			conn.setRequestProperty("X-HEARTBEAT-ID", heartbeatId);
 			conn.setConnectTimeout(readTimeoutMilliSeconds);
 			conn.setReadTimeout(5000);
 

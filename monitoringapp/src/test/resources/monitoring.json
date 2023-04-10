@@ -10,6 +10,7 @@
   "pollIntervallMinutes": 30,
   "randomIntervallSeconds": 2,
   "readTimeoutMilliSeconds": 5000,
+  "heartbeatId": "heartbeat",
   "mailConfig": {
     "activated": false,
     "host": "smtp.provider.com",
