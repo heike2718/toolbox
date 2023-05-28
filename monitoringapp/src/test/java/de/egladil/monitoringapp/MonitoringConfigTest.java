@@ -73,7 +73,7 @@ public class MonitoringConfigTest {
 			assertTrue(config.getEmails().contains("info@egladil.de"));
 			assertTrue(config.getUrls().contains("https://google.de"));
 			assertTrue(config.getUrls().contains("https://de.wikipedia.org/wiki/Spezial:Zuf%C3%A4llige_Seite"));
-			assertEquals(180, config.getRandomIntervallSeconds());
+			assertEquals(2, config.getRandomIntervallSeconds());
 			assertEquals("smtp.provider.com", config.getMailhost());
 			assertEquals(123, config.getMailport());
 			assertEquals("mail@provider.com", config.getMailuser());
