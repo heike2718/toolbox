@@ -13,10 +13,10 @@
 	<description>Anwendung zum Monitoren unserer Server</description>
 
 	<properties>
-		<commons.version>1.9.0</commons.version>
+		<commons.version>2.0.0</commons.version>
 		<dependency-check.version>8.2.1</dependency-check.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.java>11</version.java>
+		<version.java>17</version.java>
 	</properties>
 
 	<dependencyManagement>
