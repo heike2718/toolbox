@@ -12,7 +12,8 @@ public interface MessageDelegate {
 	/**
 	 * @param errorPayloads
 	 * @param emails
+	 * @return TODO
 	 */
-	void sendMessage(String messageBody, MonitoringConfig config);
+	boolean sendMessage(String messageBody, MonitoringConfig config);
 
 }

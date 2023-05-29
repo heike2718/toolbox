@@ -33,7 +33,7 @@ public class MailDelegate implements MessageDelegate {
 	}
 
 	@Override
-	public void sendMessage(final String messageBody, final MonitoringConfig config) {
+	public boolean sendMessage(final String messageBody, final MonitoringConfig config) {
 
 		final List<String> emails = config.getEmails();
 
@@ -45,7 +45,7 @@ public class MailDelegate implements MessageDelegate {
 		EmailServiceCredentials credentials = EmailServiceCredentials.createInstance(config.getMailhost(), config.getMailport(),
 			config.getMailuser(), config.getMailpwd().toCharArray(), config.getMailuser());
 
-		this.commonMailService.sendMail(maildaten, credentials);
+		return this.commonMailService.sendMail(maildaten, credentials);
 	}
 
 	String getEmpfaenger(final List<String> emails) {

@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 /dependency-reduced-pom.xml
+deptree
 
 # Log file
 /log/
@@ -28,3 +29,6 @@ hs_err_pid*
 /.project
 /.settings/
 /ObjectStore/
+
+# secrets
+src/test/resources/.monitoring.json

@@ -13,7 +13,7 @@
 	<description>Anwendung zum Monitoren unserer Server</description>
 
 	<properties>
-		<commons.version>1.9.0</commons.version>
+		<commons.version>2.0.0</commons.version>
 		<dependency-check.version>8.2.1</dependency-check.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>17</version.java>
@@ -54,11 +54,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.egladil.web</groupId>
-			<artifactId>commons-testsupport</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.14.2</version>
@@ -66,8 +61,8 @@
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-client</artifactId>
-			<version>6.2.3.Final</version>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.15.6.Final</version>
 		</dependency>
 
 		<dependency>
@@ -87,6 +82,18 @@
 		</dependency>
 
 		<!-- Test -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>6.2.3.Final</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.egladil.web</groupId>
+			<artifactId>commons-testsupport</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- api muss dabei sein, damit das surefire-plugin die tests findet! -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -183,8 +190,10 @@
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>de.egladil.monitoringapp.MonitoringApp</mainClass>
-									<!-- Log4j includes custom classes for Java 9+ (#293) -->
+									<mainClass>
+										de.egladil.monitoringapp.MonitoringApp</mainClass>
+									<!-- Log4j includes custom classes for Java
+									9+ (#293) -->
 									<manifestEntries>
 										<Multi-Release>true</Multi-Release>
 									</manifestEntries>
@@ -199,7 +208,8 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.2.0</version>
 				<configuration>
-					<!-- <excludes> <exclude>**/logback.xml</exclude> <exclude>**/logback.properties</exclude>
+					<!-- <excludes> <exclude>**/logback.xml</exclude>
+					<exclude>**/logback.properties</exclude>
 						</excludes> -->
 					<archive>
 						<!-- embeds the version -->

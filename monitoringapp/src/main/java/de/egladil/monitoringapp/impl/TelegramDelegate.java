@@ -24,7 +24,17 @@ public class TelegramDelegate implements MessageDelegate {
 	private static final Logger LOG = LoggerFactory.getLogger(TelegramDelegate.class);
 
 	@Override
-	public void sendMessage(final String messageBody, final MonitoringConfig config) {
+	public boolean sendMessage(final String messageText, final MonitoringConfig configuration) {
+
+		return doSendWithCommonsMessager(messageText, configuration);
+	}
+
+	/**
+	 * @param  messageBody
+	 * @param  config
+	 * @return
+	 */
+	boolean doSendWithCommonsMessager(final String messageBody, final MonitoringConfig config) {
 
 		Messager messager = Messager.createMessageSenderOfType(MessagerType.TELEGRAM);
 
@@ -38,14 +48,17 @@ public class TelegramDelegate implements MessageDelegate {
 
 			messager.sendMessage(messageBody, configuration);
 
+			return true;
+
 		} catch (Exception e) {
 
 			String configDescription = messager.getConfigurationDescription().print();
 			LOG.error("Message konnte nicht versendet werden: {} - TelegramConfiguration pruefen: {}", e.getMessage(),
 				configDescription, e);
 
-		}
+			return false;
 
+		}
 	}
 
 }
